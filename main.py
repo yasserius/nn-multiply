@@ -84,17 +84,9 @@ def gen_data(cfg_id):
     X = X.astype(float)
     y = y.astype(float)
 
-#     if cfg['problems']['log_norm']:
-#         X = np.log(X)
-#         y = np.log(y)
-
-#         max_val = max(X.max(), y.max())
-#         print(max_val)
-#         X /= max_val
-#         y /= max_val
-#     else:
-#         X /= high2
-#         y /= high2 * 10.
+    max_val = max(X.max(), y.max())
+    X /= max_val
+    y /= max_val
 
     print(X)
     print(y)
