@@ -77,8 +77,8 @@ def gen_data(cfg_id):
     n = cfg['problems']['n_problems']
 
     y = np.random.randint(1, high2, size=(n, 2))
-    y = np.unique(X, axis=0)
-    X = np.log(X[:, 0] + X[:, 1])
+    y = np.unique(y, axis=0)
+    X = np.log(y[:, 0] + y[:, 1])
 
     # TODO: Do this better..
     X = X.astype(float)
