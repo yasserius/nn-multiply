@@ -76,25 +76,25 @@ def gen_data(cfg_id):
     high2 = cfg['problems']['high2']
     n = cfg['problems']['n_problems']
 
-    X = np.random.randint(1, high2, size=(n, 2))
-    X = np.unique(X, axis=0)
-    y = X[:, 0] * X[:, 1]
+    y = np.random.randint(1, high2, size=(n, 2))
+    y = np.unique(X, axis=0)
+    X = np.log(X[:, 0] + X[:, 1])
 
     # TODO: Do this better..
     X = X.astype(float)
     y = y.astype(float)
 
-    if cfg['problems']['log_norm']:
-        X = np.log(X)
-        y = np.log(y)
+#     if cfg['problems']['log_norm']:
+#         X = np.log(X)
+#         y = np.log(y)
 
-        max_val = max(X.max(), y.max())
-        print(max_val)
-        X /= max_val
-        y /= max_val
-    else:
-        X /= high2
-        y /= high2 * 10.
+#         max_val = max(X.max(), y.max())
+#         print(max_val)
+#         X /= max_val
+#         y /= max_val
+#     else:
+#         X /= high2
+#         y /= high2 * 10.
 
     print(X)
     print(y)
