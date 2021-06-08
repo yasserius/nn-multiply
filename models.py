@@ -8,34 +8,41 @@ import torch.optim as optim
 class ReverseFCNet(nn.Module):
     def __init__(self, cfg, output_size):
         super(ReverseFCNet, self).__init__()
-        input_size = cfg['problems']['input_size']
+        # input_size = cfg['problems']['input_size']
 
-        activation_type = cfg['model']['activation']
-        if activation_type == "ReLU":
-            activation_cls = nn.ReLU
-        elif activation_type == "ELU":
-            activation_cls = nn.ELU
-        elif activation_type == "LeakyReLU":
-            activation_cls = nn.LeakyReLU
+        # activation_type = cfg['model']['activation']
+        # if activation_type == "ReLU":
+        #     activation_cls = nn.ReLU
+        # elif activation_type == "ELU":
+        #     activation_cls = nn.ELU
+        # elif activation_type == "LeakyReLU":
+        #     activation_cls = nn.LeakyReLU
 
-        fc_sizes = cfg['model']['fc_sizes'] + [output_size]
+        # fc_sizes = cfg['model']['fc_sizes'] + [output_size]
 
-        net = []
-        last_fc_size = input_size
-        for size in fc_sizes:
-            net.append(nn.Linear(last_fc_size, size))
-            net.append(activation_cls())
-            last_fc_size = size
+        # net = []
+        # last_fc_size = input_size
+        # for size in fc_sizes:
+        #     net.append(nn.Linear(last_fc_size, size))
+        #     net.append(activation_cls())
+        #     last_fc_size = size
 
         # net[0].weight.data.fill_(1.0)
         # net[0].bias.data.fill_(0.0)
 
-        net.pop(-1)
+        # net.pop(-1)
+
+        net = [
+          nn.Linear(1, 100),
+          nn.ReLU(),
+          nn.Linear(100, 2)
+        ]
         self.fc_net = nn.Sequential(*net)
         print(self.fc_net)
 
     def forward(self, x):
         # x = torch.flatten(x, 1)
+        x = torch.reshape(x, (x.shape[0], 1))
         return self.fc_net(x)
 
 
@@ -77,8 +84,8 @@ class RegressionOptimizer:
                 self.optimizer.zero_grad()
 
                 outputs = self.net(inputs.float())
-
-                loss = self.criterion(outputs.T, labels.float())
+                
+                loss = self.criterion(outputs, labels.float())
                 loss.backward()
                 self.optimizer.step()
 
