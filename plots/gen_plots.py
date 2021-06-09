@@ -15,11 +15,12 @@ def run():
     req_len = 100
     base_paths = ['../runs/']
     problems = [
-        ('7_high2_50', 10),
-        ('7_high2_200', 10),
-        ('7_high2_500', 10),
-        ('7_high2_2000', 10),
-        ('7_high2_2000_fc100', 10)
+        # ('7_high2_50', 10),
+        # ('7_high2_200', 10),
+        # ('7_high2_500', 10),
+        # ('7_high2_2000', 10),
+        # ('7_high2_2000_fc100', 10)
+        ('2', 10)
     ]
     kv = {}
     for problem in problems:

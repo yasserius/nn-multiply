@@ -6,42 +6,39 @@ import torch.optim as optim
 
 
 class ReverseFCNet(nn.Module):
-    def __init__(self, cfg, output_size):
+    def __init__(self, cfg):
         super(ReverseFCNet, self).__init__()
-        # input_size = cfg['problems']['input_size']
+        input_size = cfg['problems']['input_size']
+        output_size = cfg['problems']['output_size']
 
-        # activation_type = cfg['model']['activation']
-        # if activation_type == "ReLU":
-        #     activation_cls = nn.ReLU
-        # elif activation_type == "ELU":
-        #     activation_cls = nn.ELU
-        # elif activation_type == "LeakyReLU":
-        #     activation_cls = nn.LeakyReLU
+        activation_type = cfg['model']['activation']
+        if activation_type == "ReLU":
+            activation_cls = nn.ReLU
+        elif activation_type == "ELU":
+            activation_cls = nn.ELU
+        elif activation_type == "LeakyReLU":
+            activation_cls = nn.LeakyReLU
 
-        # fc_sizes = cfg['model']['fc_sizes'] + [output_size]
+        fc_sizes = cfg['model']['fc_sizes'] + [output_size]
 
-        # net = []
-        # last_fc_size = input_size
-        # for size in fc_sizes:
-        #     net.append(nn.Linear(last_fc_size, size))
-        #     net.append(activation_cls())
-        #     last_fc_size = size
+        net = []
+        last_fc_size = input_size
+        for size in fc_sizes:
+            net.append(nn.Linear(last_fc_size, size))
+            net.append(activation_cls())
+            last_fc_size = size
 
-        # net[0].weight.data.fill_(1.0)
-        # net[0].bias.data.fill_(0.0)
+        net.pop(-1)
 
-        # net.pop(-1)
-
-        net = [
-          nn.Linear(1, 100),
-          nn.ReLU(),
-          nn.Linear(100, 2)
-        ]
+        # net = [
+        #   nn.Linear(1, 100),
+        #   nn.ReLU(),
+        #   nn.Linear(100, 2)
+        # ]
         self.fc_net = nn.Sequential(*net)
         print(self.fc_net)
 
     def forward(self, x):
-        # x = torch.flatten(x, 1)
         x = torch.reshape(x, (x.shape[0], 1))
         return self.fc_net(x)
 
@@ -62,7 +59,7 @@ class RegressionOptimizer:
 
         # Set it all up.
         # TODO 1 is hardcoded.
-        self.net = ReverseFCNet(cfg, 1)
+        self.net = ReverseFCNet(cfg)
         self.criterion = nn.MSELoss()
         if cfg['model']['optimizer'] == 'sgd':
             self.optimizer = optim.SGD(
@@ -77,6 +74,7 @@ class RegressionOptimizer:
         self.net.train()
         data_len = len(self.train_data_loader)
         for epoch in range(self.n_epochs):
+            print(f'\n\nEPOCH #{epoch}')
             batch_loss = 0.
             for i, data in enumerate(self.train_data_loader):
                 inputs, labels = data
@@ -98,23 +96,25 @@ class RegressionOptimizer:
                     sys.stdout.write('\r' + msg)
                     sys.stdout.flush()
 
+                    self.logger.append_loss(avg_loss)
+
                 # if i % 1000 == 0:
                 #     for param in self.net.parameters():
                 #         print(param.data)
                 #         # print(param.shape)
                 #     print('')
 
-                if i % 1000 == 0:
-                    data = {
-                        "loss_train": batch_loss / (i + 1)
-                    }
-                    self.logger.log_train(data, data_len * epoch + i)
+                # if i % 1000 == 0:
+                #     data = {
+                #         "loss_train": batch_loss / (i + 1)
+                #     }
+                #     self.logger.log_train(data, data_len * epoch + i)
 
             self.net.eval()
             data = {}
             test_loss = self.eval(epoch, do_print=False, debug=epoch % 10 == 0)
             data['loss_eval'] = test_loss
-            self.logger.log_eval_reverse(data, epoch)
+            # self.logger.log_eval_reverse(data, epoch)
             self.net.train()
         print('')
 
@@ -153,7 +153,8 @@ class RegressionOptimizer:
         print(" ", sse, ssm)
         print("R2", R2)
 
-        self.logger.log_custom_reverse_kpi("R2", R2, epoch)
+        # self.logger.log_custom_reverse_kpi("R2", R2, epoch)
+        self.logger.append_r2(R2)
 
         data_len = len(self.test_data_loader)
 

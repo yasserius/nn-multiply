@@ -6,8 +6,8 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 
 
-mpl.font_manager._rebuild()
-plt.rc('font', family='Raleway')
+# mpl.font_manager._rebuild()
+# plt.rc('font', family='Raleway')
 # n = 6
 # color = plt.cm.Greens(np.linspace(.3, 1, n))[::-1]
 # mpl.rcParams['axes.prop_cycle'] = plt.cycler('color', color)

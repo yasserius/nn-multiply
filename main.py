@@ -63,12 +63,12 @@ def run_experiment(cfg_id, n_runs=1):
     for _ in range(n_runs):
         model_fname = get_model_fname(cfg)
         logger = Logger(model_fname, cfg)
-        logger.log_config()
+        # logger.log_config()
         optimizer = RegressionOptimizer(
             cfg, train_data_loader, test_data_loader, logger
         )
         optimizer.train()
-        logger.close()
+        logger.save_log()
 
 
 def gen_data(cfg_id):
