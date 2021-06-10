@@ -33,7 +33,9 @@ class Logger:
             'config': self.cfg,
             'config_name': self.model_fname,
             'loss': [],
-            'r2': []
+            'r2': [],
+            'res_x': [],
+            'res_y': [],
         }
 
     def save_log(self):
@@ -51,6 +53,12 @@ class Logger:
     
     def append_r2(self, r2):
         self.log['r2'].append(r2)
+        
+    def append_res_x(self, res_x):
+        self.log['res_x'].append(res_x)
+        
+    def append_res_y(self, res_y):
+        self.log['res_y'].append(res_y)
 
 # class Logger:
 #     def __init__(self, model_fname, cfg):
