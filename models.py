@@ -4,6 +4,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+import numpy as np
+
 
 class ReverseFCNet(nn.Module):
     def __init__(self, cfg):
@@ -76,12 +78,22 @@ class RegressionOptimizer:
         for epoch in range(self.n_epochs):
             print(f'\n\nEPOCH #{epoch}')
             batch_loss = 0.
+            all_res_x = []
+            all_res_y = []
+
             for i, data in enumerate(self.train_data_loader):
                 inputs, labels = data
 
                 self.optimizer.zero_grad()
 
                 outputs = self.net(inputs.float())
+
+                outputs_temp = outputs.detach().numpy()
+                labels_temp = labels.numpy()
+                res = np.abs(outputs_temp-labels_temp)
+                avg_res = np.mean(res, axis=0)
+                all_res_x.append(avg_res[0])
+                all_res_y.append(avg_res[1])
                 
                 loss = self.criterion(outputs, labels.float())
                 loss.backward()
@@ -109,6 +121,12 @@ class RegressionOptimizer:
                 #         "loss_train": batch_loss / (i + 1)
                 #     }
                 #     self.logger.log_train(data, data_len * epoch + i)
+            res_x = np.mean(all_res_x)
+            res_y = np.mean(all_res_y)
+            res_x = float(res_x)
+            res_y = float(res_y)
+            self.logger.append_res_x(res_x)
+            self.logger.append_res_y(res_y)
 
             self.net.eval()
             data = {}
