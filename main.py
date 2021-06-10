@@ -83,10 +83,9 @@ def gen_data(cfg_id):
     # TODO: Do this better..
     X = X.astype(float)
     y = y.astype(float)
-
-    max_val = max(X.max(), y.max())
-    X /= max_val
-    y /= max_val
+    
+    X /= X.max()
+    y /= y.max()
 
     print(X)
     print(y)
