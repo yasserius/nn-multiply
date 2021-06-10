@@ -138,5 +138,43 @@
             "lr": 0.0001,
             "fc_sizes": [1000]
         }
+    },
+    "50000_nodes_lr_0_0001": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 1000,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [50000]
+        }
+    },
+    "50000_nodes_lr_0_001": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 1000,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.001,
+            "fc_sizes": [50000]
+        }
     }
 }
