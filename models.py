@@ -103,6 +103,9 @@ class RegressionOptimizer:
                 # Then the last term will be wrong.
                 batch_loss += loss.item() * self.batch_size
                 if i % 1000 == 0:
+                    print('outputs = \n', outputs)
+                    print('labels = \n', labels)
+
                     avg_loss = batch_loss / (i + 1)
                     msg = '[%d, %5d] loss: %.3f' % (epoch + 1, i, avg_loss)
                     sys.stdout.write('\r' + msg)
