@@ -1,0 +1,180 @@
+{
+    "1": {
+        "dataset_id": "1",
+        "problems": {
+            "n_problems": 1000,
+            "input_size": 1,
+            "output_size": 2
+        },
+        "model": {
+            "use_norm_multiply": false,
+            "use_norm_divide": false,
+            "norm_multiply": 1.0,
+            "activation": "ReLU",
+            "class_weights": [],
+            "no_norm": false,
+            "norm_data": false,
+            "shuffle_data": true,
+            "network": "FC",
+            "n_epochs": 500,
+            "batch_size": 100,
+            "optimizer": "sgd",
+            "optimizer_sgd_momentum": 0.9,
+            "lr": 0.002,
+            "fc_sizes": [50],
+            "train_eval_split": 0.9
+        }
+    },
+    "10_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [10]
+        }
+    },
+    "20_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [20]
+        }
+    },
+    "50_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [50]
+        }
+    },
+    "100_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [100]
+        }
+    },
+    "500_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [500]
+        }
+    },
+    "1000_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [1000]
+        }
+    },
+    "50000_nodes_lr_0_0001": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 1000,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.0001,
+            "fc_sizes": [50000]
+        }
+    },
+    "50_50_nodes": {
+        "base_cfg": "1",
+        "dataset_id": "2",
+        "problems": {
+            "n_problems": 10000,
+            "high2": 100,
+            "input_size": 1,
+            "output_size": 2
+
+        },
+        "model": {
+            "activation": "ReLU",
+            "n_epochs": 500,
+            "batch_size": 10,
+            "optimizer": "Adam",
+            "lr": 0.001,
+            "fc_sizes": [50, 50]
+        }
+    }
+}
