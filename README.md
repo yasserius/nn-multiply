@@ -1,6 +1,8 @@
-# nn-multiply
+# Can Neural Networks Undo ln(x+y) ==> (x, y)?
 
-This repository contains code for training neural networks to predict the multiplication of two numbers.
+This repository contains code for training neural networks to predict `x` and `y` if `ln(x+y)` is given.
+
+The code here is almost the same as [xozero/nn-multiply](https://github.com/xozero/nn-multiply).
 
 To run the experiments yourself, use `main.py`:
 
@@ -21,10 +23,12 @@ To configure experiments, edit `simulations.json`. The `CFG_ID` in the above com
 Example commands for generating data for configuration `7_high2_2000` and for training a model afterwards:
 
 ```
-python3 main.py --gendata -c 7_high2_2000
-python3 main.py --train -c 7_high2_2000
+python3 main.py --gendata -c 10_nodes
+python3 main.py --train -c 10_nodes
 ```
 
 The generated data for all experiments configured in the checked in `simulations.json` can be found in `datasets`, it is all checked in. Thus, the `--gendata` step can be omitted for those.
 
-A blog post with details can be found [here](https://blog.xa0.de/post/Multiplying-large-numbers-with-Neural-Networks/).
+The results are stored in the `runs` directory and the some plots are generated inside the `plots` directory.
+
+A blog post with details can be found [here](#).
